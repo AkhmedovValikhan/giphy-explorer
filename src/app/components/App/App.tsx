@@ -1,10 +1,11 @@
-import { debounce } from 'lodash-es';
+import { debounce, uniqBy } from 'lodash-es';
 import { inject } from 'propin';
 import * as React from 'react';
 import './App.scss';
 
 import { getNextPage } from './AppUtils';
 
+import { getWindow } from '../../../common/utils/DomUtils';
 import { GiphyResultEntry } from '../../model/giphy';
 import { GiphyService } from '../../services/GiphyService/GiphyService';
 import { GiphyServiceQuery } from '../../services/GiphyService/GiphyService.types';
@@ -49,6 +50,11 @@ export class App extends React.PureComponent<{}, State> {
         this.setState({ loading: true });
 
         const nextPage = getNextPage(currentPage, searchQuery, this._lastExecutedSearchQuery);
+        const reset = nextPage === 0;
+        if (reset) {
+            getWindow().scrollTo({ top: 0 });
+            this.setState({ giphies: [] });
+        }
 
         const query: GiphyServiceQuery = {
             limit: 9,
@@ -58,7 +64,7 @@ export class App extends React.PureComponent<{}, State> {
 
         const result = await this._giphyClient.executeQuery(query);
         this._lastExecutedSearchQuery = this.state.searchQuery;
-        giphies = nextPage !== 0 ? this.state.giphies.concat(result.gifs) : result.gifs;
+        giphies = uniqBy(this.state.giphies.concat(result.gifs), g => g.id);
 
         this.setState({
             giphies,
