@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+$class: '.input';
+
+#{$class} {
+    display: flex;
+    background: $color-background;
+    border: none;
+    font-family: inherit;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+    color: white;
+    transition: all .3s ease-in-out;
+
+    &:hover,
+    &:focus {
+        background: #444444;
+    }
+
+    &--fluid {
+        width: 100%;
+    }
+}

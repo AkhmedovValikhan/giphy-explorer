@@ -1,0 +1,29 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins';
+
+$card-class: '.giphy-card';
+$card-height: 300px;
+$card-border-radius: 15px;
+
+
+#{$card-class} {
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    background: red;
+
+    &>img {
+        width: 100%;
+    }
+
+    transition: transform .3s cubic-bezier(0.15, 1, 0.33, 1);
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    &--loading {
+        background: $color-primary-bg;
+    }
+}
