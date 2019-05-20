@@ -4,12 +4,17 @@ import { Button } from '../../../common/components/Button/Button';
 import { Input } from '../../../common/components/Input/Input';
 import { LITERALS } from '../../../literals';
 import './Header.scss';
+import { GiphyListMode } from '../Giphy/List';
+import { Switch } from '../../../common/components/Switch';
+import { MODE_ITEMS } from './Header.aux';
 
 export interface HeaderProps {
     totalResults: number;
     startContent?: React.ReactNode;
     onSearchChanged: (q: string) => void;
     searchQuery: string;
+    mode: GiphyListMode;
+    onModeChange: (mode: GiphyListMode) => void;
 }
 
 interface State {
@@ -73,7 +78,7 @@ export class Header extends React.PureComponent<HeaderProps, State> {
                     </div>
                 </div>
                 <div className='header__content header__content--end'>
-                    {this.props.startContent}
+                    <Switch items={MODE_ITEMS} value={this.props.mode} onChange={this.props.onModeChange} />
                 </div>
             </div>
         </header>;

@@ -3,15 +3,13 @@ import { inject } from 'propin';
 import * as React from 'react';
 import './App.scss';
 
-import { Switch } from '../../../common/components/Switch';
 import { getNextPage } from './AppUtils';
 
 import { GiphyResultEntry } from '../../model/giphy';
 import { GiphyService } from '../../services/GiphyService/GiphyService';
-import { GifsList, GiphyListMode } from '../Giphy/List';
-import { Header } from '../Header/Header';
-import { MODE_ITEMS } from './App.aux';
 import { GiphyServiceQuery } from '../../services/GiphyService/GiphyService.types';
+import { GifsList, GiphyListMode } from '../Giphy/List';
+import { Header, HeaderProps } from '../Header/Header';
 
 const SEARCH_DEBOUNCE_TIME = 300;
 
@@ -72,22 +70,20 @@ export class App extends React.PureComponent<{}, State> {
 
     private executeSearch = debounce(() => this.fetchGiphies(), SEARCH_DEBOUNCE_TIME);
 
+    private onToggleMode: HeaderProps['onModeChange'] = (mode) => this.setState({ mode });
     private onSearchChanged = (q: string) => {
         this._lastExecutedSearchQuery = this.state.searchQuery;
         this.setState({ searchQuery: q });
         this.executeSearch();
     }
 
-    private onToggleMode = () => {
-        this.setState({ mode: this.state.mode === GiphyListMode.Column ? GiphyListMode.Grid : GiphyListMode.Column });
-    }
-
     private renderHeader() {
         return <Header
+            mode={this.state.mode}
+            onModeChange={this.onToggleMode}
             onSearchChanged={this.onSearchChanged}
             searchQuery={this.state.searchQuery}
             totalResults={this.state.totalResults}
-            startContent={<Switch items={MODE_ITEMS} value={this.state.mode} onChange={this.onToggleMode} />}
         />;
     }
 
