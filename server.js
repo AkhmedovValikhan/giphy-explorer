@@ -9,4 +9,4 @@ app.get('*', function (_request, response) {
     response.sendFile(path.resolve(__dirname, './dist/index.html'));
   });
 
-app.listen(process.env.PORT || 8080, () => console.log('News app listening on port 8080!'))
+app.listen(process.env.PORT || 8080, () => console.log('Giphy app listening on port 8080!'))

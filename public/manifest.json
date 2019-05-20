@@ -1,6 +1,6 @@
 {
-  "short_name": "News",
-  "name": "News App",
+  "short_name": "Giphy",
+  "name": "Giphy App",
   "icons": [
     {
       "src": "icons/favicon.ico",

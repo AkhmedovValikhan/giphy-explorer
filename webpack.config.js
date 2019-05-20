@@ -99,7 +99,7 @@ module.exports = function (env) {
                 filename: "styles.css",
             }) : undefined,
             ...htmlPlugins(isEnvProduction),
-            new BundleAnalyzerPlugin(),
+            // new BundleAnalyzerPlugin(),
             new ServiceWorkerWebpackPlugin({
                 entry: path.join(__dirname, "src/service-worker.js"),
             }),
