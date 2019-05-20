@@ -3,14 +3,15 @@ import { inject } from 'propin';
 import * as React from 'react';
 import './App.scss';
 
-import { Switch, SwitchItem } from '../common/components/Switch';
-import { getNextPage } from '../common/utils/Utils';
-import { GRID_ICON, HAMBURGER_ICON } from '../icons';
+import { Switch } from '../../../common/components/Switch';
+import { getNextPage } from './AppUtils';
 
-import { GifsList, GiphyListMode } from './components/Giphy/List';
-import { Header } from './components/Header/Header';
-import { GiphyResultEntry } from './model/giphy';
-import { GiphyService } from './services/GiphyService';
+import { GiphyResultEntry } from '../../model/giphy';
+import { GiphyService } from '../../services/GiphyService/GiphyService';
+import { GifsList, GiphyListMode } from '../Giphy/List';
+import { Header } from '../Header/Header';
+import { MODE_ITEMS } from './App.aux';
+import { GiphyServiceQuery } from '../../services/GiphyService/GiphyService.types';
 
 const SEARCH_DEBOUNCE_TIME = 300;
 
@@ -23,7 +24,7 @@ interface State {
     currentPage: number;
 }
 
-class App extends React.PureComponent<{}, State> {
+export class App extends React.PureComponent<{}, State> {
     private _lastExecutedSearchQuery: string = '';
     @inject() private _giphyClient: GiphyService;
 
@@ -46,27 +47,25 @@ class App extends React.PureComponent<{}, State> {
 
     private fetchGiphies = async () => {
         let giphies: GiphyResultEntry[];
-        let totalCount: number = 0;
         const { currentPage, searchQuery } = this.state;
         this.setState({ loading: true });
 
         const nextPage = getNextPage(currentPage, searchQuery, this._lastExecutedSearchQuery);
 
-        if (searchQuery) {
-            const result = await this._giphyClient.searchGifs(searchQuery, nextPage);
-            giphies = result.gifs;
-            totalCount = result.totalCount;
-        } else {
-            giphies = await this._giphyClient.trending(nextPage);
-        }
+        const query: GiphyServiceQuery = {
+            limit: 9,
+            page: nextPage,
+            search: searchQuery,
+        };
 
+        const result = await this._giphyClient.executeQuery(query);
         this._lastExecutedSearchQuery = this.state.searchQuery;
-        giphies = nextPage !== 0 ? this.state.giphies.concat(giphies) : giphies;
+        giphies = nextPage !== 0 ? this.state.giphies.concat(result.gifs) : result.gifs;
 
         this.setState({
             giphies,
             currentPage: nextPage,
-            totalResults: totalCount,
+            totalResults: result.totalCount,
             loading: false,
         });
     }
@@ -83,8 +82,6 @@ class App extends React.PureComponent<{}, State> {
         this.setState({ mode: this.state.mode === GiphyListMode.Column ? GiphyListMode.Grid : GiphyListMode.Column });
     }
 
-    private onMore = () => this.fetchGiphies();
-
     private renderHeader() {
         return <Header
             onSearchChanged={this.onSearchChanged}
@@ -96,7 +93,13 @@ class App extends React.PureComponent<{}, State> {
 
     private renderBody() {
         return <div className='container root-container'>
-            <GifsList loading={this.state.loading} mode={this.state.mode} fetchMore={this.onMore} gifs={this.state.giphies} />
+            <GifsList
+                loading={this.state.loading}
+                mode={this.state.mode}
+                fetchMore={this.fetchGiphies}
+                totalCount={this.state.totalResults}
+                gifs={this.state.giphies}
+            />
         </div>;
     }
 
@@ -110,16 +113,3 @@ class App extends React.PureComponent<{}, State> {
     }
 
 }
-
-export default App;
-
-const MODE_ITEMS: SwitchItem[] = [
-    {
-        iconInline: HAMBURGER_ICON,
-        value: GiphyListMode.Column,
-    },
-    {
-        iconInline: GRID_ICON,
-        value: GiphyListMode.Grid,
-    },
-];

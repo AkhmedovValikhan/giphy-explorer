@@ -13,8 +13,7 @@ const GRID_TRANSITION_PROPS: TransitionProps['timeout'] = {
     enter: FADE_ANIMATION_DURATION,
     exit: FADE_ANIMATION_DURATION,
 };
-interface GiphiesListState {
-}
+interface GiphiesListState { }
 
 export class GifsList extends React.PureComponent<GifsListProps, GiphiesListState> {
     public static defaultProps: Partial<GifsListProps> = {
@@ -59,13 +58,19 @@ export class GifsList extends React.PureComponent<GifsListProps, GiphiesListStat
     }
 
     private renderGiphies(): React.ReactNode {
+        const hasMore = this.props.totalCount > this.props.gifs.length;
         const wrapper = (cntnt: React.ReactNode, mode: GiphyListMode) => <CSSTransition
             key={mode}
             unmountOnExit
             in={this.props.mode === mode}
             timeout={GRID_TRANSITION_PROPS}
         >
-            <InfiniteScrollList className={`giphy-list ${mode === GiphyListMode.Grid ? 'giphy-list--grid' : ''}`} getScrollParent={() => document.body} onReachBottom={this.onListScroll}>
+            <InfiniteScrollList
+                enabled={hasMore}
+                className={`giphy-list ${mode === GiphyListMode.Grid ? 'giphy-list--grid' : ''}`}
+                getScrollParent={() => document.body}
+                onReachBottom={this.onListScroll}
+            >
                 {cntnt}
             </InfiniteScrollList>
         </CSSTransition>;

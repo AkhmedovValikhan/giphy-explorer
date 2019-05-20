@@ -5,6 +5,7 @@ export const enum GiphyListMode {
     Column = 'column',
 }
 export interface GifsListProps {
+    totalCount: number;
     gifs: GiphyResultEntry[];
     fetchMore: () => Promise<void>;
     mode?: GiphyListMode;

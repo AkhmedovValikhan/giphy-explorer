@@ -1,8 +1,8 @@
 import { injector } from 'propin';
 import * as React from 'react';
 import { hydrate, render } from 'react-dom';
-import App from './app/App';
-import { GiphyService } from './app/services/GiphyService';
+import { App } from './app/components/App';
+import { GiphyService } from './app/services/GiphyService/GiphyService';
 
 const UBER_API_KEY = 'CdRKiCMbTnt9CkZTZ0lGukSczk6iT4Z6';
 
