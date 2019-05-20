@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import { getGiphyHeight } from '../../../utils/GiphyUtils';
 import './GiphyCard.scss';
 import { GyphyCardItemProps } from './GiphyCard.types';
+import { getGiphyRelativeHeight } from './GiphyCardUtils';
 
 interface State {
     width: number;
@@ -40,14 +40,14 @@ export class GyphyCard extends React.PureComponent<GyphyCardItemProps, State> {
             'giphy-card--loading': this.state.loading,
         });
 
-        const img = this.props.giphy.images.fixed_width;
-        let height = 0;
-        if (this.state.width) {
-            height = getGiphyHeight(Number.parseInt(img.height, 10), Number.parseInt(img.width, 10), this.state.width);
-        }
-
+        const height = getGiphyRelativeHeight(this.props.giphy, this.state.width);
         return (
-            <a className={classes} href={this.props.giphy.url} target='__blank' ref={this.onRef}>
+            <a
+                className={classes}
+                href={this.props.giphy.url}
+                target='__blank'
+                ref={this.onRef}
+            >
                 <img height={height} src={this.props.giphy.images.fixed_width.url} onLoad={this.onGiphyLoad} />
             </a>
         );
