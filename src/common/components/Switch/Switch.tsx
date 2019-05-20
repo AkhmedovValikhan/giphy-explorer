@@ -9,11 +9,18 @@ export class Switch extends React.PureComponent<SwitchProps> {
     };
 
     private renderOption = (option: SwitchItem) => {
+        const isActive = option.value === this.props.value;
         const classes = classNames({
             'switch__option': true,
-            'switch__option--active': option.value === this.props.value,
+            'switch__option--active': isActive,
         });
-        return <div className={classes} key={option.value} onClick={() => this.props.onChange(option.value)}>
+        return <div
+            role='radio'
+            aria-checked={isActive}
+            className={classes}
+            key={option.value}
+            onClick={() => this.props.onChange(option.value)}
+        >
             <div className='switch__option-icon' dangerouslySetInnerHTML={{ __html: option.iconInline }} />
         </div>;
     }
@@ -24,7 +31,7 @@ export class Switch extends React.PureComponent<SwitchProps> {
 
     public render() {
         const className = `switch switch--${this.props.theme} ${this.props.className ? this.props.className : ''}`;
-        return <div className={className} onClick={this.props.onClick}>
+        return <div className={className} onClick={this.props.onClick} role='radiogroup'>
             <div className={`switch__highlighter switch__highlighter--${this.getValueIndex()}`} />
             {this.props.items.map(this.renderOption)}
         </div>;

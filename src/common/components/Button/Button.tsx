@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { Theme } from '..';
 import './Button.scss';
 
 export interface ButtonProps {
     onClick: () => void | Promise<void>;
     className?: string;
-    theme?: 'primary' | 'secondary' | 'secondary-hollow' | 'default';
+    theme?: Theme;
 }
 
 export class Button extends React.PureComponent<ButtonProps> {
@@ -14,7 +15,7 @@ export class Button extends React.PureComponent<ButtonProps> {
 
     public render() {
         const className = `button button--${this.props.theme} ${this.props.className ? this.props.className : ''}`;
-        return <div className={className} onClick={this.props.onClick}>
+        return <div role='button' className={className} onClick={this.props.onClick}>
             {this.props.children}
         </div>;
     }
