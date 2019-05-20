@@ -7,6 +7,7 @@ import { GiphyResultEntry } from '../../../model/giphy';
 import { GyphyCard } from '../Card/GiphyCard';
 import './GiphyList.scss';
 import { GifsListProps, GiphyListMode } from './GiphyList.types';
+import { RippleLoader } from './RippleLoader';
 
 const FADE_ANIMATION_DURATION = 300;
 const GRID_TRANSITION_PROPS: TransitionProps['timeout'] = {
@@ -15,7 +16,7 @@ const GRID_TRANSITION_PROPS: TransitionProps['timeout'] = {
 };
 interface GiphiesListState { }
 
-export class GifsList extends React.PureComponent<GifsListProps, GiphiesListState> {
+export class GiphyList extends React.PureComponent<GifsListProps, GiphiesListState> {
     public static defaultProps: Partial<GifsListProps> = {
         mode: GiphyListMode.Column,
     };
@@ -31,10 +32,6 @@ export class GifsList extends React.PureComponent<GifsListProps, GiphiesListStat
     // #endregion
 
     // #region Renders
-    private renderLoading() {
-        return <div className='lds-ripple'><div /><div /></div>;
-    }
-
     private renderGiphy = (giphy: GiphyResultEntry) => {
         return <GyphyCard
             key={giphy.id}
@@ -66,7 +63,7 @@ export class GifsList extends React.PureComponent<GifsListProps, GiphiesListStat
             timeout={GRID_TRANSITION_PROPS}
         >
             <InfiniteScrollList
-                enabled={hasMore}
+                enabled={hasMore && !this.props.loading}
                 className={`giphy-list ${mode === GiphyListMode.Grid ? 'giphy-list--grid' : ''}`}
                 getScrollParent={() => document.body}
                 onReachBottom={this.onListScroll}
@@ -82,7 +79,7 @@ export class GifsList extends React.PureComponent<GifsListProps, GiphiesListStat
         return <React.Fragment>
             {this.props.mode === GiphyListMode.Grid ? listView : gridView}
             {this.props.mode === GiphyListMode.Grid ? gridView : listView}
-            {this.props.loading && this.renderLoading()}
+            {this.props.loading && <RippleLoader />}
         </React.Fragment>;
     }
     // #endregion

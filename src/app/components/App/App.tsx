@@ -9,7 +9,7 @@ import { getWindow } from '../../../common/utils/DomUtils';
 import { GiphyResultEntry } from '../../model/giphy';
 import { GiphyService } from '../../services/GiphyService/GiphyService';
 import { GiphyServiceQuery } from '../../services/GiphyService/GiphyService.types';
-import { GifsList, GiphyListMode } from '../Giphy/List';
+import { GiphyList, GiphyListMode } from '../Giphy/List';
 import { Header, HeaderProps } from '../Header/Header';
 
 const SEARCH_DEBOUNCE_TIME = 300;
@@ -73,14 +73,18 @@ export class App extends React.PureComponent<{}, State> {
             loading: false,
         });
     }
-
-    private executeSearch = debounce(() => this.fetchGiphies(), SEARCH_DEBOUNCE_TIME);
+    private fetchGiphiesDebounced = debounce(() => this.fetchGiphies(), SEARCH_DEBOUNCE_TIME);
 
     private onToggleMode: HeaderProps['onModeChange'] = (mode) => this.setState({ mode });
     private onSearchChanged = (q: string) => {
         this._lastExecutedSearchQuery = this.state.searchQuery;
-        this.setState({ searchQuery: q });
-        this.executeSearch();
+        this.setState({ searchQuery: q }, () => {
+            if (!q) {
+                this.fetchGiphies();
+            } else {
+                this.fetchGiphiesDebounced();
+            }
+        });
     }
 
     private renderHeader() {
@@ -95,7 +99,7 @@ export class App extends React.PureComponent<{}, State> {
 
     private renderBody() {
         return <div className='container root-container'>
-            <GifsList
+            <GiphyList
                 loading={this.state.loading}
                 mode={this.state.mode}
                 fetchMore={this.fetchGiphies}
