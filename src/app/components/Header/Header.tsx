@@ -2,25 +2,13 @@ import classNames from 'classnames';
 import * as React from 'react';
 import { Button } from '../../../common/components/Button/Button';
 import { Input } from '../../../common/components/Input/Input';
-import { LITERALS } from '../../../literals';
-import './Header.scss';
-import { GiphyListMode } from '../Giphy/List';
 import { Switch } from '../../../common/components/Switch';
+import { LITERALS } from '../../../literals';
 import { MODE_ITEMS } from './Header.aux';
+import './Header.scss';
+import { HeaderProps } from './Header.types';
 
-export interface HeaderProps {
-    totalResults: number;
-    startContent?: React.ReactNode;
-    onSearchChanged: (q: string) => void;
-    searchQuery: string;
-    mode: GiphyListMode;
-    onModeChange: (mode: GiphyListMode) => void;
-}
-
-interface State {
-}
-
-export class Header extends React.PureComponent<HeaderProps, State> {
+export class Header extends React.PureComponent<HeaderProps, {}> {
     constructor(props: HeaderProps) {
         super(props);
         this.state = {

@@ -65,7 +65,6 @@ export class GiphyList extends React.PureComponent<GifsListProps, GiphiesListSta
             <InfiniteScrollList
                 enabled={hasMore && !this.props.loading}
                 className={`giphy-list ${mode === GiphyListMode.Grid ? 'giphy-list--grid' : ''}`}
-                getScrollParent={() => document.body}
                 onReachBottom={this.onListScroll}
             >
                 {cntnt}

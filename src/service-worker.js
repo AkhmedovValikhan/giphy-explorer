@@ -1,7 +1,8 @@
+//@ts-check
+
 // Very simple service worker implementation
 
-var shellCacheName = "news-app-shell";
-var apiCacheName = "news-app-api";
+var shellCacheName = "giphy-explorer-shell-v1";
 var appShellFiles = [
     // Cache chunks emitted by webpack. Got ijected by plugin.
     ...serviceWorkerOption.assets,

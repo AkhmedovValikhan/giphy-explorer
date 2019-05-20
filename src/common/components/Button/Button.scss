@@ -34,5 +34,3 @@ $btn-class: '.button';
 
 @include button-theme('primary', $color-primary-bg, $color-primary-bg-hover, white);
 // @include button-theme('secondary', $color-secondary-bg, $color-secondary-bg-hover, $color-secondary);
-// @include button-theme('secondary-hollow', white, $color-secondary-extra-light, $color-secondary);
-// @include button-theme('default', white, $color-primary-light, $color-primary);
