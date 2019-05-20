@@ -1,5 +1,5 @@
-import { GiphyClient } from "./GiphyService";
-import { GiphyEndpointResult } from "../model/giphy";
+import { GiphyEndpointResult } from '../model/giphy';
+import { GiphyService } from './GiphyService';
 
 const TEST_API_KEY = 'TEST_API_KEY';
 const mockFetch = (_args: any) => {
@@ -9,11 +9,11 @@ const mockFetch = (_args: any) => {
 };
 
 describe('GiphyService', () => {
-    let service: GiphyClient;
+    let service: GiphyService;
 
     beforeEach(() => {
         (window as any).fetch = mockFetch;
-        service = new GiphyClient(TEST_API_KEY);
+        service = new GiphyService(TEST_API_KEY);
     });
 
     it('should throw if args are not valid', () => {

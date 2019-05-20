@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import { getGiphyHeight } from '../../utils/GiphyUtils';
+import { getGiphyHeight } from '../../../utils/GiphyUtils';
 import './GiphyCard.scss';
 import { GyphyCardItemProps } from './GiphyCard.types';
 

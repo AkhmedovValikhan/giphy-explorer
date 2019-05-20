@@ -2,7 +2,7 @@ import { injector } from 'propin';
 import * as React from 'react';
 import { hydrate, render } from 'react-dom';
 import App from './app/App';
-import { GiphyClient } from './app/services/GiphyService';
+import { GiphyService } from './app/services/GiphyService';
 
 const UBER_API_KEY = 'CdRKiCMbTnt9CkZTZ0lGukSczk6iT4Z6';
 
@@ -18,14 +18,14 @@ if (!window.PRERENDER) {
 }
 
 export default function () {
-    injector.bind(GiphyClient).toInstance({
+    injector.bind(GiphyService).toInstance({
         trending: () => Promise.resolve([]),
-    } as Partial<GiphyClient> as GiphyClient);
+    } as Partial<GiphyService> as GiphyService);
     render(<App />, document.getElementById('root'));
 }
 
 function initializeInjector() {
-    injector.bind(GiphyClient).toInstance(new GiphyClient(UBER_API_KEY));
+    injector.bind(GiphyService).toInstance(new GiphyService(UBER_API_KEY));
 }
 
 function initializeServiceWorker() {

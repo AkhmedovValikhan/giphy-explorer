@@ -1,4 +1,4 @@
-import { GiphyResultEntry } from '../../model/giphy';
+import { GiphyResultEntry } from '../../../model/giphy';
 
 export interface GyphyCardItemProps {
     loading?: boolean;

@@ -1,18 +1,16 @@
-// import { Cancelable } from 'lodash';
 import { debounce } from 'lodash-es';
 import { inject } from 'propin';
 import * as React from 'react';
 import './App.scss';
 
-import { Switch } from '../common/components/Switch/Switch';
-import { SwitchItem } from '../common/components/Switch/Switch.types';
+import { Switch, SwitchItem } from '../common/components/Switch';
 import { getNextPage } from '../common/utils/Utils';
 import { GRID_ICON, HAMBURGER_ICON } from '../icons';
-import { GifsList } from './components/Giphy/GiphyList';
-import { GiphyListMode } from './components/Giphy/GiphyList.types';
+
+import { GifsList, GiphyListMode } from './components/Giphy/List';
 import { Header } from './components/Header/Header';
 import { GiphyResultEntry } from './model/giphy';
-import { GiphyClient } from './services/GiphyService';
+import { GiphyService } from './services/GiphyService';
 
 const SEARCH_DEBOUNCE_TIME = 300;
 
@@ -27,7 +25,7 @@ interface State {
 
 class App extends React.PureComponent<{}, State> {
     private _lastExecutedSearchQuery: string = '';
-    @inject() private _giphyClient: GiphyClient;
+    @inject() private _giphyClient: GiphyService;
 
     constructor() {
         super({});
@@ -46,7 +44,7 @@ class App extends React.PureComponent<{}, State> {
         this.fetchGiphies();
     }
 
-    private fetchGiphies = async (_page: number = 0) => {
+    private fetchGiphies = async () => {
         let giphies: GiphyResultEntry[];
         let totalCount: number = 0;
         const { currentPage, searchQuery } = this.state;
@@ -85,7 +83,7 @@ class App extends React.PureComponent<{}, State> {
         this.setState({ mode: this.state.mode === GiphyListMode.Column ? GiphyListMode.Grid : GiphyListMode.Column });
     }
 
-    private onMore = (page: number) => this.fetchGiphies(page);
+    private onMore = () => this.fetchGiphies();
 
     private renderHeader() {
         return <Header

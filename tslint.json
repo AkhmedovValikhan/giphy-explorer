@@ -22,6 +22,7 @@
         "interface-name": false,
         "jsx-no-multiline-js": false,
         "no-implicit-dependencies": false,
+        "no-submodule-imports": false,
         "no-object-literal-type-assertion": false,
         "variable-name": {
             "options": [

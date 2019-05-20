@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { InfiniteScrollList } from '../../../common/components/InifiniteScrollList/InfiniteScrollList';
-import { buckets } from '../../../common/utils/ArrayUtils';
-import { GiphyResultEntry } from '../../model/giphy';
-import { GyphyCard } from './GiphyCard';
+import { InfiniteScrollList } from '../../../../common/components/InifiniteScrollList';
+import { buckets } from '../../../../common/utils/ArrayUtils';
+import { GiphyResultEntry } from '../../../model/giphy';
+import { GyphyCard } from '../Card/GiphyCard';
 import './GiphyList.scss';
 import { GifsListProps, GiphyListMode } from './GiphyList.types';
 
@@ -20,8 +20,8 @@ export class GifsList extends React.PureComponent<GifsListProps, GiphiesListStat
     }
 
     // #region Handlers
-    private onListScroll = async (page: number) => {
-        await this.props.fetchMore(page);
+    private onListScroll = async () => {
+        await this.props.fetchMore();
     }
     // #endregion
 
@@ -37,11 +37,6 @@ export class GifsList extends React.PureComponent<GifsListProps, GiphiesListStat
         grid = columns.map((gifs, ind) => <div className='giphy-list__column' key={ind}>
             {gifs.map(this.renderGiphy)}
         </div>);
-
-        // const classes = classNames({
-        //     'giphy-list': true,
-        //     ['giphy-list--' + (this.props.mode === GiphyListMode.Column ? 'column' : 'grid')]: true,
-        // });
 
         const gridView = <CSSTransition key='1' unmountOnExit in={this.props.mode === GiphyListMode.Column} timeout={{ exit: 300, enter: 300 }}>
             <InfiniteScrollList className='giphy-list' getScrollParent={() => document.body} onReachBottom={this.onListScroll}>

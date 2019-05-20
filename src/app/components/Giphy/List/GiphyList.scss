@@ -1,0 +1,46 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins';
+$list: '.giphy-list';
+$grid-gap: 10px;
+$grid-fade-offset: 40px;
+
+#{$list} {
+    transition: all .3s ease-in-out;
+
+    &.enter {
+        transform: translateY($grid-fade-offset);
+        opacity: 0;
+
+        &-active {
+            transform: translateY($grid-fade-offset);
+        }
+
+        &-done {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    &.exit {
+        transform: translateY(0);
+        opacity: 1;
+
+        &-active {
+            transform: translateY($grid-fade-offset);
+            opacity: 0;
+        }
+    }
+
+    &--grid {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .giphy-card {
+        margin-bottom: $grid-gap;
+    }
+
+    &__column {
+        width: calc((100% - #{$grid-gap * 2}) / 3);
+    }
+}

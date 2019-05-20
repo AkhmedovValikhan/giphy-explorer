@@ -2,12 +2,9 @@ import classNames from 'classnames';
 import omit from 'lodash-es/omit';
 import * as React from 'react';
 import './Input.scss';
+import { InputProps } from './Input.types';
 
 const OVERRIDEN_PROPS: (keyof InputProps)[] = ['className', 'fluid'];
-
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    fluid?: boolean;
-}
 
 export class Input extends React.PureComponent<InputProps, {}> {
     public render() {

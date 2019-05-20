@@ -3,7 +3,7 @@ import { GiphyEndpointResult, GiphyRating, GiphyRequest, GiphyResultEntry, Giphy
 
 const GIPHY_URL = 'https://api.giphy.com/v1/gifs';
 
-export class GiphyClient {
+export class GiphyService {
 
     constructor(
         private readonly _apiKey: string) {

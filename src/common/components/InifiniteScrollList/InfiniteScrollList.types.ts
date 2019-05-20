@@ -1,5 +1,5 @@
 export interface InfiniteScrollListProps {
-    onReachBottom: () => void;
+    onReachBottom: () => Promise<void>;
     getScrollParent: () => HTMLElement;
     enabled?: boolean;
     className?: string;

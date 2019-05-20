@@ -1,12 +1,6 @@
 import * as React from 'react';
-import { Theme } from '..';
+import { ButtonProps } from '.';
 import './Button.scss';
-
-export interface ButtonProps {
-    onClick: () => void | Promise<void>;
-    className?: string;
-    theme?: Theme;
-}
 
 export class Button extends React.PureComponent<ButtonProps> {
     public static defaultProps: Partial<ButtonProps> = {

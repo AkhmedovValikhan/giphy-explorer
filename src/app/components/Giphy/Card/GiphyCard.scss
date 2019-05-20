@@ -1,13 +1,12 @@
-@import '../../../styles/variables.scss';
-@import '../../../styles/mixins';
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins';
 
 $card-class: '.giphy-card';
-$card-height: 300px;
-$card-border-radius: 15px;
+$card-border-radius: 10px;
 
 
 #{$card-class} {
-    border-radius: 10px;
+    border-radius: $card-border-radius;
     overflow: hidden;
     display: block;
     width: 100%;

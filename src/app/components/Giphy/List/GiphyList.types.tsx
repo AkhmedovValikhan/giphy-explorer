@@ -1,4 +1,4 @@
-import { GiphyResultEntry } from '../../model/giphy/response';
+import { GiphyResultEntry } from '../../../model/giphy';
 
 export const enum GiphyListMode {
     Grid = 'grid',
@@ -6,7 +6,7 @@ export const enum GiphyListMode {
 }
 export interface GifsListProps {
     gifs: GiphyResultEntry[];
-    fetchMore: (page: number) => Promise<void>;
+    fetchMore: () => Promise<void>;
     mode?: GiphyListMode;
     loading: boolean;
 }
