@@ -10,7 +10,6 @@ export const HAMBURGER_ICON = `
 </svg>
 `;
 
-
 export const GRID_ICON = `
 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="965.199px" height="965.199px" viewBox="0 0 965.199 965.199" style="enable-background:new 0 0 965.199 965.199;" xml:space="preserve">
 <g>

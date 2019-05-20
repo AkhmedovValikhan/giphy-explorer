@@ -14,9 +14,8 @@ const GRID_TRANSITION_PROPS: TransitionProps['timeout'] = {
     enter: FADE_ANIMATION_DURATION,
     exit: FADE_ANIMATION_DURATION,
 };
-interface GiphiesListState { }
 
-export class GiphyList extends React.PureComponent<GifsListProps, GiphiesListState> {
+export class GiphyList extends React.PureComponent<GifsListProps, {}> {
     public static defaultProps: Partial<GifsListProps> = {
         mode: GiphyListMode.Column,
     };

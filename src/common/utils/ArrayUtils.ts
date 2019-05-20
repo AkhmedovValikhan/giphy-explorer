@@ -12,4 +12,4 @@ export const buckets = <TItem>(bucketsCount: number, items: TItem[]) => {
         res[indx % bucketsCount].push(item);
         return res;
     }, result);
-}
+};

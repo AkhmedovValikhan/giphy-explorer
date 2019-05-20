@@ -17,7 +17,7 @@ if (!window.PRERENDER) {
     initializeServiceWorker();
 }
 
-export default function () {
+export default function() {
     injector.bind(GiphyService).toInstance({
         trending: () => Promise.resolve([]),
     } as Partial<GiphyService> as GiphyService);

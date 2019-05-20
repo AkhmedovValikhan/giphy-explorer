@@ -15,6 +15,6 @@ describe('AppUtils', () => {
                 const nextPage = getNextPage(currentPage, searchQuery, prevQuery);
                 expect(nextPage).toBe(expected);
             });
-        })
+        });
     });
 });
