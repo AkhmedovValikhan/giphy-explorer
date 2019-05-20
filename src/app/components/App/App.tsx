@@ -10,7 +10,7 @@ import { GiphyResultEntry } from '../../model/giphy';
 import { GiphyService } from '../../services/GiphyService/GiphyService';
 import { GiphyServiceQuery } from '../../services/GiphyService/GiphyService.types';
 import { GiphyList, GiphyListMode } from '../Giphy/List';
-import { Header, HeaderProps } from '../Header/Header';
+import { Header, HeaderProps } from '../Header';
 
 const SEARCH_DEBOUNCE_TIME = 300;
 
