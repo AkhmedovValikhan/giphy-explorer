@@ -33,9 +33,7 @@ export class InfiniteScrollList extends React.PureComponent<InfiniteScrollListPr
     }
 
     private onScroll = async (_e: Event) => {
-        let offset = 0;
-
-        offset = calculateBottomOffset(this._element);
+        const offset = calculateBottomOffset(this._element);
 
         if (offset < TRESHOLD) {
             this.removeEventListeners();
