@@ -57,3 +57,6 @@ Runs linting
 
 ### `npm run ci`
 Simple CI pipeline script
+
+## Known bugs
+- On tall screens app should automatically fetch more items to fill entire screen
