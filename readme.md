@@ -60,3 +60,4 @@ Simple CI pipeline script
 
 ## Known bugs
 - On tall screens app should automatically fetch more items to fill entire screen
+- On each media breakpoint change app should recalculate giphy height to keep it in correct ratio, currently it needs page reload
