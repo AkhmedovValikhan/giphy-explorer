@@ -18,6 +18,7 @@ export class InfiniteScrollList extends React.PureComponent<InfiniteScrollListPr
 
     public componentDidMount() {
         this.addEventListeners();
+        this.onScroll();
     }
 
     public componentWillUnmount() {
@@ -32,7 +33,7 @@ export class InfiniteScrollList extends React.PureComponent<InfiniteScrollListPr
         SCROLL_TRIGGER_EVENTS.forEach(ev => getWindow().removeEventListener(ev, this.onScroll));
     }
 
-    private onScroll = async (_e: Event) => {
+    private onScroll = async () => {
         const offset = calculateBottomOffset(this._element);
 
         if (offset < TRESHOLD) {

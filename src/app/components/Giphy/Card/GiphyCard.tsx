@@ -48,7 +48,7 @@ export class GyphyCard extends React.PureComponent<GyphyCardItemProps, State> {
                 target='__blank'
                 ref={this.onRef}
             >
-                <img height={height} src={this.props.giphy.images.fixed_width.url} onLoad={this.onGiphyLoad} />
+                <img height={height} src={'' /*this.props.giphy.images.fixed_width.url*/} onLoad={this.onGiphyLoad} />
             </a>
         );
     }

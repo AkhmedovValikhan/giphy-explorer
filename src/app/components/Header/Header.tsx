@@ -61,9 +61,7 @@ export class Header extends React.PureComponent<HeaderProps, {}> {
                     {this.renderSearch()}
                 </div>
                 <div className='header__content header__content--center'>
-                    <div className='header__search-container'>
-                        {this.renderTitle()}
-                    </div>
+                    {this.renderTitle()}
                 </div>
                 <div className='header__content header__content--end'>
                     <Switch items={MODE_ITEMS} value={this.props.mode} onChange={this.props.onModeChange} />

@@ -5,143 +5,89 @@
 $header: '.header';
 
 #{$header} {
-    padding: 15px 0;
-    background: #1d1d1d;
+  padding: 15px 0;
+  background: #1d1d1d;
+  display: flex;
+  align-items: center;
+  transition: all .3s ease-in-out;
+  position: fixed;
+  z-index: $header-z-index;
+  left: 0;
+  right: 0;
+
+  &__container {
     display: flex;
     align-items: center;
-    transition: all .3s ease-in-out;
-    position: fixed;
-    z-index: $header-z-index;
-    left: 0;
-    right: 0;
+    overflow: hidden;
+    justify-content: space-between;
+    transition: transform .15s ease-in-out;
+    max-height: 80px;
+  }
 
-    &__container {
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        justify-content: space-between;
-        transition: transform .15s ease-in-out;
-        max-height: 80px;
+  &__content {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    flex: 1;
+
+    &:not(:last-child) {
+      padding-right: 5px;
     }
 
-    &__content {
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        flex: 1;
-
-        &--center {
-            flex-flow: column;
-            justify-content: center;
-        }
-
-        &--start {
-            justify-content: flex-start;
-        }
-
-        &--end {
-            justify-content: flex-end;
-        }
+    @include media-breakpoint-down(sm) {
+      flex-basis: auto;
     }
 
-    &__content-center {
-        display: flex;
-        align-items: center;
-        flex-flow: column;
-        flex: 1;
-        flex-flow: column;
+    &--center {
+      flex-flow: column;
+      justify-content: center;
+
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+
     }
 
-    &__content-end {
-        flex: 1;
+    &--start {
+      justify-content: flex-start;
+
+      @include media-breakpoint-down(sm) {
+        // flex-basis: auto;
+      }
     }
 
-    &__title {
-        font-size: 1.5rem;
-        text-transform: capitalize;
-        margin: 10px 0;
-        color: $white;
-        transition: transform .15s ease-in-out;
-
-        // #{$header}--search & {
-        //     transform: translateY(-300px);
-        // }
+    &--end {
+      justify-content: flex-end;
+      flex-shrink: 0;
     }
+  }
 
-    &__search-container {
-        // width: 600px;
-        display: flex;
-        transition: all .15s ease-in-out;
-        flex-shrink: 0;
-        overflow: hidden;
+  &__title {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    margin: 10px 0;
+    color: $white;
+    transition: transform .15s ease-in-out;
+  }
 
-        #{$header}--search & {
-            // transform: translateY(-40px);
-        }
+  &__search-clear {
+    margin-left: 5px;
+    flex-shrink: 1;
+    min-width: 0 !important;
+    opacity: 0;
+
+    #{$header}--search & {
+      flex-shrink: 0;
+      opacity: 1;
     }
+  }
 
-    &__search-clear {
-        margin-left: 5px;
-        flex-shrink: 1;
-        min-width: 0 !important;
-        opacity: 0;
+  &__search {
+    width: 100%;
+    flex-shrink: 0;
 
-        #{$header}--search & {
-            flex-shrink: 0;
-            opacity: 1;
-        }
+    #{$header}--search & {
+      flex-shrink: 1;
     }
-
-    &__search {
-        width: 100%;
-        flex-shrink: 0;
-
-        #{$header}--search & {
-            flex-shrink: 1;
-        }
-    }
-
-    &__total-results {
-        color: $color-primary;
-        font-size: 1.5rem;
-        margin: 10px 0;
-        transition: transform .15s ease-in-out .15s;
-
-        #{$header}--search & {
-            transform: translateY(-40px);
-        }
-    }
-
-    &__button {
-        margin-right: 10px;
-
-        &.enter {
-            opacity: 0;
-            max-height: 0;
-        }
-
-        &.enter-active {
-            transition: all .3s;
-            max-height: 600px;
-            opacity: 1;
-
-        }
-
-        &.exit {
-            opacity: 1;
-            max-height: 600px;
-        }
-
-        &.exit-active {
-            max-height: 0;
-            opacity: 0;
-            transition: all .3s;
-        }
-    }
-
-    @include media-breakpoint-down(sm) {}
-
-
+  }
 }
-
-// box-shadow: 0 1px 5px 0px #00000066;
